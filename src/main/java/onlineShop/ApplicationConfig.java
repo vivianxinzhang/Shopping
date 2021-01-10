@@ -14,6 +14,7 @@ public class ApplicationConfig {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
+        // 要扫描的路径是什么
         sessionFactory.setPackagesToScan("onlineShop.entity");
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
@@ -38,7 +39,9 @@ public class ApplicationConfig {
         Properties hibernateProperties = new Properties();
         hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
         hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect"); // if mysql version is 8, MySQL5InnoDBDialect
+        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
         hibernateProperties.setProperty("hibernate.show_sql", "true");
+        hibernateProperties.setProperty("hibernate.format_sql", "true");
         return hibernateProperties;
     }
 }

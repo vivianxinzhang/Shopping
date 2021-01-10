@@ -1,16 +1,9 @@
 package onlineShop.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "customer")
@@ -25,17 +18,27 @@ public class Customer implements Serializable {
     private String lastName;
     private String customerPhone;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    // cascade = CascadeType.ALL  只需要save一次 会把跟这个entity相关的其它entity的内容都更新了
+    // FK
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(unique = true)
     private ShippingAddress shippingAddress;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(unique = true)
     private BillingAddress billingAddress;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(unique = true)
     private User user;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    // 此处会创建出 cart table
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(unique = true)
     private Cart cart;
+
+//    @OneToMany
+//    private List<SalesOrder> salesOrderHistory;
 
     public int getId() {
         return id;

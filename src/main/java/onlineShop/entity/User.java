@@ -15,11 +15,10 @@ public class User implements Serializable {
 
     @Id
     private String emailId;
-
     private String password;
-
     private boolean enabled;
 
+    // 不创建 foreign key, 通过 mappedBy 的方式来找到 customer
     @OneToOne(mappedBy = "user")
     private Customer customer;
 

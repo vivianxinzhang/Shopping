@@ -16,8 +16,10 @@ public class CartItem implements Serializable {
 
     private static final long serialVersionUID = -2455760938054036364L;
 
+    // Used to define the primary key in the entity class
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    // 主键生成策略： id 在数据库中作为PK，每增加一行，值自动加 1，不需要自己手动设置
     private int id;
 
     private int quantity;

@@ -15,7 +15,9 @@ public class BillingAddress implements Serializable {
     private static final long serialVersionUID = 1028098616457762743L;
 
     @Id
+    // indicating the member field below is the primary key of current entity
     @GeneratedValue(strategy = GenerationType.AUTO)
+    // 每增加一行，值自动加 1，不需要自己手动设置
     private int id;
     private String address;
     private String city;
@@ -23,6 +25,8 @@ public class BillingAddress implements Serializable {
     private String zipcode;
     private String country;
 
+    // 通过 billingAddress 找到 customer
+    // customer 中有一个field 是 billingAddress
     @OneToOne(mappedBy = "billingAddress")
     private Customer customer;
 

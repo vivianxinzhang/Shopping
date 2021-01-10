@@ -21,15 +21,17 @@ public class Cart implements Serializable {
 
     private static final long serialVersionUID = 8436097833452420298L;
 
-
     @Id
+    // indicating the member field below is the primary key of current entity
     @GeneratedValue(strategy = GenerationType.AUTO)
+    // 每增加一行，值自动加 1，不需要自己手动设置
     private int id;
 
     @OneToOne(mappedBy = "cart")
     @JsonIgnore
     private Customer customer;
 
+    // 不需要foreign key了  mappedBy 通过 cartItem中定义的field cart 来找到对应的entry
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     private List<CartItem> cartItem;
 
@@ -66,5 +68,4 @@ public class Cart implements Serializable {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
-
 }
