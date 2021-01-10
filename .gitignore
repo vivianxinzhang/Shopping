@@ -1,5 +1,7 @@
 # Ignore .idea files
 .idea/
 
+target
+
 # configuration
-configure.properties
+src/main/resources/configure.properties
