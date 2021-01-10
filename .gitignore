@@ -1,2 +1,5 @@
- .idea/
+# Ignore .idea files
+.idea/
 
+# configuration
+configure.properties
