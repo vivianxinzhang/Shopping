@@ -23,8 +23,6 @@ public class ApplicationConfig {
     @Value( "${PASSWORD}" )
     private String password;
 
-//    @Autowired
-//    private Environment env;
 
     @Bean(name = "sessionFactory")
     public LocalSessionFactoryBean sessionFactory() {
@@ -49,16 +47,15 @@ public class ApplicationConfig {
         dataSource.setUsername(username);
         dataSource.setPassword(password);
 
-//        dataSource.setUsername(env.getProperty("USERNAME"));
-//        dataSource.setPassword(env.getProperty("PASSWORD"));
-
         return dataSource;
     }
 
 
     private final Properties hibernateProperties() {
         Properties hibernateProperties = new Properties();
-        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+        // hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
+
         // hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
         // if mysql version is 8, MySQL5InnoDBDialect
         hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");

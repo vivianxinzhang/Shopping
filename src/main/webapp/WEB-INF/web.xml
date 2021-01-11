@@ -2,6 +2,7 @@
  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
+<!-- tomcat在启动的时候会读这个web.xml文件 初始化里面的信息 -->
 <web-app>
 	<display-name>OnlineShop WebSite</display-name>
 
@@ -24,18 +25,20 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
-	<!-- it is used to listen the contextloader -->
+	<!-- it is used to listen the contextloader project启动的时候需要创建的对象 ContextLoaderListener就是一个Spring IOC容器 里面放bean-->
 	<listener>
 		<listener-class>
 			org.springframework.web.context.ContextLoaderListener
 		</listener-class>
 	</listener>
 
+	<!-- project启动的时候需要创建dispatcher request先发送到dispatcher dispatcher去IOC里找到处理请求的bean(controller) -->
 	<servlet>
 		<servlet-name>onlineShop</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 	</servlet>
 
+	<!-- 这里的 servlet-name 必须跟上面 DispatcherServlet 一样 -->
 	<servlet-mapping>
 		<servlet-name>onlineShop</servlet-name>
 		<url-pattern>/</url-pattern>
