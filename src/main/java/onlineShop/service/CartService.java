@@ -10,7 +10,7 @@ public class CartService {
     @Autowired
     private CartDao cartDao;
 
-    public Cart getCardById(int cartId) {
+    public Cart getCartById(int cartId) {
         return cartDao.getCartById(cartId);
     }
 }
