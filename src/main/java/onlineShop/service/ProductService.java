@@ -1,4 +1,4 @@
-package onlineShop.controller;
+package onlineShop.service;
 
 import onlineShop.dao.ProductDao;
 import onlineShop.entity.Product;

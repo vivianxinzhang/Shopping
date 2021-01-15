@@ -17,7 +17,6 @@
 	<!-- Using this it get the actual view name by converting logical view name -->
 	<!-- for eg: logical view name is welcome -->
 	<!-- it will convert it to WEB-INF/Views/welcome.jsp -->
-
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/page/" />
@@ -26,6 +25,5 @@
 
 	<!-- mvc:resources is to find the resource file like bootstrap,css,JQuery 
 		and Images in resource folder -->
-
 	<mvc:resources mapping="/resource/**" location="/WEB-INF/resource/" />
 </beans>

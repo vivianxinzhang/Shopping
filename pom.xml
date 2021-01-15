@@ -173,13 +173,6 @@
     </dependencies>
 
     <build>
-        <resource>
-            <directory>config</directory>
-            <targetPath>${project.build.outputDirectory}</targetPath>
-            <includes>
-                <include>application.properties</include>
-            </includes>
-        </resource>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

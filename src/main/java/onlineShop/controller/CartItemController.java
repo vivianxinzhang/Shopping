@@ -7,6 +7,7 @@ import onlineShop.entity.Product;
 import onlineShop.service.CartItemService;
 import onlineShop.service.CartService;
 import onlineShop.service.CustomerService;
+import onlineShop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
@@ -45,6 +46,7 @@ public class CartItemController {
 
         Product product = productService.getProductById(productId);
 
+        // if the item is already in the cart, update quantity and total price
         for (int i = 0; i < cartItems.size(); i++) {
             CartItem cartItem = cartItems.get(i);
             if (product.getId() == (cartItem.getProduct().getId())) {
@@ -54,6 +56,7 @@ public class CartItemController {
                 return;
             }
         }
+        // if the item is not in the cart yet, add the product to user's cart
         CartItem cartItem = new CartItem();
         cartItem.setQuantity(1);
         cartItem.setProduct(product);

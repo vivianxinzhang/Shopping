@@ -1,6 +1,7 @@
 package onlineShop.controller;
 
 import onlineShop.entity.Product;
+import onlineShop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -25,6 +26,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/getProductById/{productId}", method = RequestMethod.GET)
+    // @PathVariable 从 URL中提取出 productId，作为参数传给下面这个 function
     public ModelAndView getProductById(@PathVariable(value = "productId") int productId) {
         Product product = productService.getProductById(productId);
         return new ModelAndView("productPage", "product", product);
@@ -36,6 +38,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/admin/product/addProduct", method = RequestMethod.POST)
+    // @ModelAttribute 表单内容绑定 product 这个对象
     public String addProduct(@ModelAttribute Product product, BindingResult result) {
         if (result.hasErrors()) {
             return "addProduct";

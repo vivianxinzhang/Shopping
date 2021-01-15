@@ -36,6 +36,7 @@ public class ProductDao {
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
+            // 搜索Product这张表 通过productId找到一个product
             Product product = session.get(Product.class, productId);
             session.delete(product);
             session.getTransaction().commit();
@@ -68,6 +69,7 @@ public class ProductDao {
 
     public Product getProductById(int productId) {
         try (Session session = sessionFactory.openSession()) {
+            // 搜索Product这张表 通过productId找到一个product 返回该product
             return session.get(Product.class, productId);
         } catch (Exception e) {
             e.printStackTrace();
