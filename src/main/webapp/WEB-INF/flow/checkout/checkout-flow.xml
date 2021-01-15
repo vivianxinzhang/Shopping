@@ -4,8 +4,10 @@
       xsi:schemaLocation="http://www.springframework.org/schema/webflow
 						  http://www.springframework.org/schema/webflow/spring-webflow.xsd">
 
+    <!-- 创建订单对象 -->
     <var name="order" class="onlineShop.entity.SalesOrder" />
-    
+
+    <!-- 从请求里拿到用户传进来的cartId 作为validate的参数 从数据库里拿到购物车 要将购物车信息添加到order里-->
     <action-state id="addCartToOrder">
         <evaluate expression="cartDao.validate(requestParameters.cartId)" result="order.cart" />
         <transition to="invalidCartWarning" on-exception="java.io.IOException" />

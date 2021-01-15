@@ -37,8 +37,10 @@ public class CartItemDao {
             session = sessionFactory.openSession();
             CartItem cartItem = session.get(CartItem.class, cartItemId);
             Cart cart = cartItem.getCart();
-            List<CartItem> cartItems = cart.getCartItem();
-            cartItems.remove(cartItem);
+            cart.getCartItem().remove(cartItem);  // 这里如果不remove的话 即使下面的数据库删除操作成功  hibernate还是会自动把这个item加回数据库
+
+            session.beginTransaction();
+            session.delete(cartItem);
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -49,6 +51,7 @@ public class CartItemDao {
             }
         }
     }
+
 
     public void removeAllCartItems(Cart cart) {
         List<CartItem> cartItems = cart.getCartItem();

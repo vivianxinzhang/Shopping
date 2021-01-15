@@ -22,14 +22,15 @@ import java.util.List;
 
 @Controller
 public class CartItemController {
+    // 删除所有cart item时使用
     @Autowired
-    private CartService cartService;
+    private CartService cartService;    // 用户在页面上传进来的
 
     @Autowired
     private CartItemService cartItemService;
 
     @Autowired
-    private CustomerService customerService;
+    private CustomerService customerService;    // 通过email找到customer
 
     @Autowired
     private ProductService productService;
@@ -38,13 +39,13 @@ public class CartItemController {
     @ResponseStatus(value = HttpStatus.CREATED)
     public void addCartItem(@PathVariable(value = "productId") int productId) {
         Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
-        String username = loggedInUser.getName();
-        Customer customer = customerService.getCustoemrByUserName(username);
+        String username = loggedInUser.getName();   // 通过 SecurityContext 找到 user email
+        Customer customer = customerService.getCustomerByUserName(username);    // 通过customerService找到 customer
 
-        Cart cart = customer.getCart();
-        List<CartItem> cartItems = cart.getCartItem();
+        Cart cart = customer.getCart(); // 通过customer找到cart
+        List<CartItem> cartItems = cart.getCartItem();  // 找出购物车里已经有的商品
 
-        Product product = productService.getProductById(productId);
+        Product product = productService.getProductById(productId); // 通过productId 找到product
 
         // if the item is already in the cart, update quantity and total price
         for (int i = 0; i < cartItems.size(); i++) {
@@ -56,6 +57,7 @@ public class CartItemController {
                 return;
             }
         }
+
         // if the item is not in the cart yet, add the product to user's cart
         CartItem cartItem = new CartItem();
         cartItem.setQuantity(1);
@@ -71,10 +73,11 @@ public class CartItemController {
         cartItemService.removeCartItem(cartItemId);
     }
 
+    //
     @RequestMapping(value = "/cart/removeAllItems/{cartId}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void removeAllCartItems(@PathVariable(value = "cartId") int cartId) {
-        Cart cart = cartService.getCartById(cartId);
+        Cart cart = cartService.getCartById(cartId);    // 通过cartId 找到 cart
         cartItemService.removeAllCartItems(cart);
     }
 }

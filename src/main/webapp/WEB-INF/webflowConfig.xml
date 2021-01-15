@@ -12,6 +12,7 @@
 
 	<!-- Handling flow requests: FlowHandlerMapping帮助DispatcherServlet将flow请求发送给Spring Web Flow -->
 	<!-- FlowHandlerMapping的工作仅仅是将flow请求定向到Spring Web Flow -->
+	<!-- 生成两个object/bean 对应下面的configure 交给Spring MVC来使用 -->
 	<bean id="flowHandlerMapping"
 		class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
 		<property name="flowRegistry" ref="flowRegistry"></property>
@@ -26,12 +27,14 @@
 	<!-- Wiring a flow executor:
 		The flow executor drives the execution of a flow. When a user enters a flow, the flow executor creates an instance of the flow execution for that user. -->
 	<!-- FlowHandlerAdapter调用请求flowexecutor执行具体的flow请求. -->
+	<!-- 这里flow-registry 必须跟下面定义的一样 -->
 	<webflow-config:flow-executor
 		id="flowExecutor" flow-registry="flowRegistry">
 	</webflow-config:flow-executor>
 
 	<!-- Configuring a flow registry:
-		A flow registry’s job is to load flow definitions and make them available to the flow executor. -->
+		A flow registry’s job is to load flow definitions and make them available to the flow executor.
+		加载注册 webflow 框架 加载注册后才能够让 executor 执行 -->
 	<webflow-config:flow-registry
 		id="flowRegistry" base-path="/WEB-INF/flow">
 		<webflow-config:flow-location

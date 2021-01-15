@@ -22,14 +22,30 @@ public class CartController {
     @Autowired
     private CartService cartService;
 
+//    @RequestMapping(value = "/cart/getCartById", method = RequestMethod.GET)
+//    public ModelAndView getCartId() {
+//        ModelAndView modelAndView = new ModelAndView("cart");
+//        // 通过 SecurityContextHolder 找到 Security
+//        Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+//        String username = loggedInUser.getName();
+//        // 通过 username 找到 customer
+//        Customer customer = customerService.getCustomerByUserName(username);
+//        modelAndView.addObject("cartId", customer.getCart().getId());
+//        return modelAndView;
+//    }
+//
+//    @RequestMapping(value = "/cart/getCart/{cartId}", method = RequestMethod.GET)
+//    @ResponseBody
+//    public Cart getCartItems(@PathVariable(value="cartId")int cartId){
+//        return cartService.getCartById(cartId);
+//    }
+
     @RequestMapping(value = "/cart/getCartById", method = RequestMethod.GET)
-    public ModelAndView getCartId() {
+    public ModelAndView getCartId(){
         ModelAndView modelAndView = new ModelAndView("cart");
-        // 通过 SecurityContextHolder 找到 Security
         Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
         String username = loggedInUser.getName();
-        // 通过 username 找到 customer
-        Customer customer = customerService.getCustoemrByUserName(username);
+        Customer customer = customerService.getCustomerByUserName(username);
         modelAndView.addObject("cartId", customer.getCart().getId());
         return modelAndView;
     }
@@ -39,5 +55,6 @@ public class CartController {
     public Cart getCartItems(@PathVariable(value="cartId")int cartId){
         return cartService.getCartById(cartId);
     }
+
 }
 

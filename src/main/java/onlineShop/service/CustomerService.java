@@ -23,7 +23,7 @@ public class CustomerService {
         customerDao.addCustomer(customer);
     }
 
-    public Customer getCustoemrByUserName(String userName) {
+    public Customer getCustomerByUserName(String userName) {
         return customerDao.getCustomerByUserName(userName);
     }
 }
